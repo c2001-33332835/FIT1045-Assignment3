@@ -1,0 +1,7 @@
+id,city_ascii,lat,lng,admin_name,capital,country,iso3
+1036074917,Sydney,-33.865,151.2094,New South Wales,admin,Australia,AUS
+1036533631,Melbourne,-37.8136,144.9631,Victoria,admin,Australia,AUS
+1036192929,Brisbane,-27.4678,153.0281,Queensland,admin,Australia,AUS
+1036178956,Perth,-31.9522,115.8589,Western Australia,admin,Australia,AUS
+1036538171,Adelaide,-34.9275,138.6,South Australia,admin,Australia,AUS
+1036142029,Canberra,-35.2931,149.1269,Australian Capital Territory,primary,Australia,AUS

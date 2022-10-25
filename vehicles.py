@@ -3,7 +3,6 @@ from math import ceil, inf
 
 from locations import CapitalType, City, Country
 from locations import create_example_countries_and_cities
-# from city_country_csv_reader import create_cities_countries_from_CSV
 
 class Vehicle(ABC):
     """
@@ -138,33 +137,34 @@ class TeleportingTarteTrolley(Vehicle):
         return f"TeleportingTarteTrolley ({self.travel_time} h | {self.max_distance} km)"
 
 
-# def create_example_vehicles() -> list[Vehicle]:
-#     """
-#     Creates 3 examples of vehicles.
-#     """
-#     return [CrappyCrepeCar(200), DiplomacyDonutDinghy(100, 500), TeleportingTarteTrolley(1, 500)]
+def create_example_vehicles() -> list[Vehicle]:
+    """
+    Creates 3 examples of vehicles.
+    """
+    return [CrappyCrepeCar(200), DiplomacyDonutDinghy(100, 500), TeleportingTarteTrolley(1, 500)]
 
 
-# if __name__ == "__main__":
-#     create_cities_countries_from_CSV("worldcities_truncated.csv")
+if __name__ == "__main__":
+    # create_cities_countries_from_CSV("worldcities_truncated.csv")
+    create_example_countries_and_cities()
 
-#     # australia = Country.countries["Australia"]
-#     # melbourne = australia.get_city("Melbourne")
-#     # canberra = australia.get_city("Canberra")
-#     # japan = Country.countries["Japan"]
-#     # tokyo = japan.get_city("Tokyo")
+    australia = Country.countries["Australia"]
+    melbourne = australia.get_city("Melbourne")
+    canberra = australia.get_city("Canberra")
+    japan = Country.countries["Japan"]
+    tokyo = japan.get_city("Tokyo")
 
-#     # vehicles = create_example_vehicles()
+    vehicles = create_example_vehicles()
 
-#     # for vehicle in vehicles:
-#     #     for from_city, to_city in [(melbourne, canberra), (tokyo, canberra), (tokyo, melbourne)]:
-#     #         print("Travelling from {} to {} will take {} hours with {}".format(from_city, to_city, vehicle.compute_travel_time(from_city, to_city), vehicle))
+    for vehicle in vehicles:
+        for from_city, to_city in [(melbourne, canberra), (tokyo, canberra), (tokyo, melbourne)]:
+            print("Travelling from {} to {} will take {} hours with {}".format(from_city, to_city, vehicle.compute_travel_time(from_city, to_city), vehicle))
 
-#     # print(list(filter(lambda x : "fr" in x.lower(), list(Country.countries.keys()))))
+    # # print(list(filter(lambda x : "fr" in x.lower(), list(Country.countries.keys()))))
 
-#     france = Country.countries["France"]
-#     paris = france.get_city("Paris")
-#     bordeaux = france.get_city("Bordeaux")
-#     print(list(filter(lambda x : "" in x.lower(), list([city.name for city in france.cities]))))
+    # france = Country.countries["France"]
+    # paris = france.get_city("Paris")
+    # bordeaux = france.get_city("Bordeaux")
+    # print(list(filter(lambda x : "" in x.lower(), list([city.name for city in france.cities]))))
 
-#     # print(paris.distance(bordeaux))
+    # # print(paris.distance(bordeaux))

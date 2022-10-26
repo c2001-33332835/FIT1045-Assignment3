@@ -3,13 +3,12 @@ from locations import City, Country
 from trip import Trip
 from vehicles import Vehicle, create_example_vehicles
 from networkx import dijkstra_path
-from networkx import Graph
-from networkx.classes.graph import Graph as NetworkXGraphType
+from networkx import Graph as NetworkXGraph
 from networkx.exception import NetworkXNoPath
 from math import inf
 
-def plot_graph_for_vehicle(vehicle: Vehicle) -> NetworkXGraphType:
-    graph = Graph()
+def plot_graph_for_vehicle(vehicle: Vehicle) -> NetworkXGraph:
+    graph = NetworkXGraph()
     # plot node
     cities = list(City.cities.values())
     for city in cities:

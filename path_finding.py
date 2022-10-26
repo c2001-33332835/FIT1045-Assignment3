@@ -8,6 +8,14 @@ from networkx.exception import NetworkXNoPath
 from math import inf
 
 def plot_graph_for_vehicle(vehicle: Vehicle) -> NetworkXGraph:
+    """
+    Plot a weighted graph.
+    Takes in a vehicle.
+    All cities will be plotted as Nodes and
+    the travel time between all possible cities will be plotted as weighted edges.
+    If the travel is impossible between any 2 cities for that vehicle, no edge for that 2 cities will be plotted
+    Return the graph as networkx.Graph.
+    """
     graph = NetworkXGraph()
     # plot node
     cities = list(City.cities.values())
@@ -32,7 +40,7 @@ def plot_graph_for_vehicle(vehicle: Vehicle) -> NetworkXGraph:
 
 def find_shortest_path(vehicle: Vehicle, from_city: City, to_city: City) -> Trip:
     """
-    Returns a shortest path between two cities for a given vehicle,
+    Returns a shortest path between two cities for a given vehicle using the Dijkstra Algorithm,
     or None if there is no path.
     """
 

@@ -141,7 +141,7 @@ def create_example_vehicles() -> list[Vehicle]:
     """
     Creates 3 examples of vehicles.
     """
-    return [CrappyCrepeCar(200), DiplomacyDonutDinghy(100, 500), TeleportingTarteTrolley(1, 500)]
+    return [CrappyCrepeCar(200), DiplomacyDonutDinghy(100, 500), TeleportingTarteTrolley(3, 2000)]
 
 
 if __name__ == "__main__":
@@ -159,12 +159,3 @@ if __name__ == "__main__":
     for vehicle in vehicles:
         for from_city, to_city in [(melbourne, canberra), (tokyo, canberra), (tokyo, melbourne)]:
             print("Travelling from {} to {} will take {} hours with {}".format(from_city, to_city, vehicle.compute_travel_time(from_city, to_city), vehicle))
-
-    # # print(list(filter(lambda x : "fr" in x.lower(), list(Country.countries.keys()))))
-
-    # france = Country.countries["France"]
-    # paris = france.get_city("Paris")
-    # bordeaux = france.get_city("Bordeaux")
-    # print(list(filter(lambda x : "" in x.lower(), list([city.name for city in france.cities]))))
-
-    # # print(paris.distance(bordeaux))

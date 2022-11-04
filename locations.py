@@ -81,7 +81,7 @@ class City():
     """
 
     cities: dict[str, City] = dict() # a dict that associates city IDs to instances.
-    coordinate: tuple[float, float] # a vector for the coordinate. [0] is latitude, and [1] is longditude
+    coordinate: tuple[float, float] # a vector for the coordinate. [0] is latitude, and [1] is longitude
     capital_type: CapitalType
     country: Country
     city_id: str

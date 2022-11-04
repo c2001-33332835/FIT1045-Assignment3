@@ -121,6 +121,17 @@ class City():
         """
         return f"{self.name} ({self.country.iso3})"
 
+    def __repr__(self) -> str:
+        """
+        Return a string representation of the object in comply with the python convention.
+        For example, City('Melbourne', '-37.8136', '144.9631', 'Australia', 'admin', '1036533631')
+        """
+
+        params = [self.name, self.coordinate[0], self.coordinate[1], self.country.name, self.capital_type.value, self.city_id]
+        params = [repr(str(param)) for param in params]
+
+        return "City(" + (", ".join(params)) + ")"
+
 
 def create_example_countries_and_cities() -> None:
     """

@@ -42,6 +42,10 @@ class UserInterface(ABC):
     def wait_for_interact(self) -> any:
         pass
 
+    @abstractmethod
+    def execute(self) -> None:
+        pass
+
 class SimpleMenuUserInterface(UserInterface):
     options: dict[int, str]
     title: str | None

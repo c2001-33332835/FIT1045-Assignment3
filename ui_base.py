@@ -47,19 +47,22 @@ class SimpleMenuUserInterface(UserInterface):
     title: str | None
     description: str | None
     color: str
-    allow_back: bool
+    allow_undo: bool
     input_err: str | None
+    undo_prompt: str
 
     def __init__(self, options: dict[int, str],
                 title: str | None = None, description: str | None = None,
-                color: str = "C", allow_back: bool = True) -> None:
+                color: str = "C", allow_undo: bool = True,
+                undo_prompt: str = "(Press Ctrl-C to undo previous step)") -> None:
         super().__init__()
         self.options = options
         self.title = title
         self.description = description
         self.color = color
-        self.allow_back = allow_back
+        self.allow_undo = allow_undo
         self.input_err = None
+        self.undo_prompt = undo_prompt
 
     def display(self) -> None:
         self.clear()
@@ -77,8 +80,8 @@ class SimpleMenuUserInterface(UserInterface):
         longest_key = max(len(i) for i in keys)
 
         print("  Please select by typing a number and hit Enter:")
-        if self.allow_back:
-            print("  (Press Ctrl-C to undo previous step)")
+        if self.allow_undo and self.undo_prompt:
+            print(f"  {self.undo_prompt}")
         for i in self.options.keys():
             val = self.options[i]
             space_padding = " " * (longest_key - len(str(i)))
@@ -102,7 +105,7 @@ class SimpleMenuUserInterface(UserInterface):
                 self.input_err = str(e)
                 self.display()
             except KeyboardInterrupt:
-                if self.allow_back:
+                if self.allow_undo:
                     return None
                 self.display()
 
@@ -113,19 +116,20 @@ class ProgressedMenuUserInterface(UserInterface):
     title: str | None
     description: str | None
     color: str
-    allow_back: bool
+    allow_undo: bool
     input_err: str | None
     past_color: str
     future_color: str
     current_color: str
     breadcrumbs_color: str
+    undo_prompt: str
 
     def __init__(self, options: dict[int, str],
                  progress: list[str], current_progress_index: int,
                  title: str | None = None, description: str | None = None,
-                 color: str = "C", allow_back: bool = True,
+                 color: str = "C", allow_undo: bool = True,
                  past_color: str = "W", future_color: str = "w", current_color: str = "G",
-                 breadcrumbs_color: str = "w") -> None:
+                 breadcrumbs_color: str = "w", undo_prompt: str = "(Press Ctrl-C to undo previous step)") -> None:
         super().__init__()
         self.options = options
         self.progress = progress
@@ -133,12 +137,13 @@ class ProgressedMenuUserInterface(UserInterface):
         self.title = title
         self.description = description
         self.color = color
-        self.allow_back = allow_back
+        self.allow_undo = allow_undo
         self.input_err = None
         self.past_color = past_color
         self.future_color = future_color
         self.current_color = current_color
         self.breadcrumbs_color = breadcrumbs_color
+        self.undo_prompt = undo_prompt
 
     def __form_breadcrumbs(self) -> str:
         breadcrumb_elements = []
@@ -174,8 +179,8 @@ class ProgressedMenuUserInterface(UserInterface):
         longest_key = max(len(i) for i in keys)
 
         print("  Please select by typing a number and hit Enter:")
-        if self.allow_back:
-            print("  (Press Ctrl-C to undo previous step)")
+        if self.allow_undo and self.undo_prompt:
+            print(f"  {self.undo_prompt}")
         for i in self.options.keys():
             val = self.options[i]
             space_padding = " " * (longest_key - len(str(i)))
@@ -199,7 +204,7 @@ class ProgressedMenuUserInterface(UserInterface):
                 self.input_err = str(e)
                 self.display()
             except KeyboardInterrupt:
-                if self.allow_back:
+                if self.allow_undo:
                     return None
                 self.display()
 
@@ -208,17 +213,20 @@ class ValueInputBox(UserInterface):
     description: str | None
     validator: Callable[[str], tuple[bool, str]] | None
     color: str
+    allow_undo: bool
     prompt: str
+    undo_prompt: str
 
     def __init__(self, title: str, validator: Callable[[str], tuple[bool, str]] | None = None,
-                 description: str | None = None, color: str = "C", allow_back: bool = True,
-                 prompt: str = "Please enter a value") -> None:
+                 description: str | None = None, color: str = "C", allow_undo: bool = True,
+                 prompt: str = "Please enter a value", undo_prompt: str = "(Press Ctrl-C to undo previous step)") -> None:
         self.title = title
         self.validator = validator
         self.description = description
         self.color = color
-        self.allow_back = allow_back
+        self.allow_undo = allow_undo
         self.prompt = prompt
+        self.undo_prompt = undo_prompt
 
     def display(self) -> None:
         self.clear()
@@ -230,8 +238,8 @@ class ValueInputBox(UserInterface):
             print("\n".join(lines))
         
         print("  " + self.prompt)
-        if self.allow_back:
-            print("  (Press Ctrl-C to undo previous step)")
+        if self.allow_undo and self.undo_prompt:
+            print(f"  {self.undo_prompt}")
 
     def wait_for_interact(self) -> any:
         while True:
@@ -246,6 +254,6 @@ class ValueInputBox(UserInterface):
                 self.input_err = str(e)
                 self.display()
             except KeyboardInterrupt:
-                if self.allow_back:
+                if self.allow_undo:
                     return None
                 self.display()

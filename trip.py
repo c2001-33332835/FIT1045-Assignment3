@@ -1,3 +1,4 @@
+from collections.abc import Iterator
 from vehicles import Vehicle, CrappyCrepeCar, DiplomacyDonutDinghy, TeleportingTarteTrolley
 from vehicles import create_example_vehicles
 from locations import City, Country
@@ -41,7 +42,6 @@ class Trip():
 
         return total_time
 
-
     def find_fastest_vehicle(self, vehicles: list[Vehicle]) -> tuple[Vehicle, float]:
         """
         Returns the Vehicle for which this trip is fastest, and the duration of the trip.
@@ -54,6 +54,10 @@ class Trip():
             if travel_times[i] == minimum:
                 return vehicles[i], minimum
 
+    def trip_pair(self) -> Iterator[tuple[City]]:
+        for i in range(len(self.sequence) - 1):
+            yield self.sequence[i], self.sequence[i + 1]
+
     def __str__(self) -> str:
         """
         Returns a representation of the trip as a sequence of cities:
@@ -62,6 +66,12 @@ class Trip():
 
         # convert each city into string, and join them using an arrow symbol
         return " -> ".join(str(i) for i in self.sequence)
+
+    def __iter__(self) -> Iterator[City]:
+        """
+        Retrun an iterator of the cities.
+        """
+        return self.sequence.__iter__()
 
 
 def create_example_trips() -> list[Trip]:

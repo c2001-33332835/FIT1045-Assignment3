@@ -153,11 +153,11 @@ class ProgressedMenuUserInterface(UserInterface):
         breadcrumb_elements = []
         for i in range(len(self.progress)):
             if i < self.current_progress_index:
-                breadcrumb_elements.append(f"§{self.past_color}{self.progress[i]}§0")
+                breadcrumb_elements.append(f"§{self.past_color} {self.progress[i]} §0")
             elif i == self.current_progress_index:
                 breadcrumb_elements.append(f"§4§{self.current_color}[{self.progress[i]}]§0")
             else:
-                breadcrumb_elements.append(f"§{self.future_color}{self.progress[i]}§0")
+                breadcrumb_elements.append(f"§{self.future_color} {self.progress[i]} §0")
 
         message = f" §{self.breadcrumbs_color}->§0 ".join(breadcrumb_elements)
         return parse(message)

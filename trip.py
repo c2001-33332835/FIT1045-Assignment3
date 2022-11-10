@@ -42,13 +42,17 @@ class Trip():
 
         return total_time
 
-    def find_fastest_vehicle(self, vehicles: list[Vehicle]) -> tuple[Vehicle, float]:
+    def find_fastest_vehicle(self, vehicles: list[Vehicle]) -> tuple[Vehicle | None, float]:
         """
         Returns the Vehicle for which this trip is fastest, and the duration of the trip.
         If there is a tie, return the first vehicle in the list.
         If the trip is not possible for any of the vehicle, return (None, math.inf).
         """
         travel_times = [self.total_travel_time(vehicle) for vehicle in vehicles]
+
+        if all(i == inf for i in travel_times):
+            return (None, inf)
+        
         minimum = min(travel_times)
         for i in range(len(vehicles)):
             if travel_times[i] == minimum:
@@ -73,6 +77,8 @@ class Trip():
         """
         return self.sequence.__iter__()
 
+    def __getitem__(self, index) -> City:
+        return self.sequence[index]
 
 def create_example_trips() -> list[Trip]:
     """

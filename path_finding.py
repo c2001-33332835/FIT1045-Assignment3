@@ -56,6 +56,10 @@ def find_shortest_path(vehicle: Vehicle, from_city: City, to_city: City) -> Trip
         for city_id in path[1:]:
             trip.add_next_city(City.cities[city_id])
         
+        # if departure and arrival is the same
+        if len(trip.sequence) == 1:
+            trip.sequence += trip.sequence
+
         return trip
 
     except NetworkXNoPath:

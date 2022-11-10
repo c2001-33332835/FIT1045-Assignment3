@@ -5,7 +5,7 @@ def create_cities_countries_from_CSV(path_to_csv: str) -> None:
     Reads a CSV file given its path and creates instances of City and Country for each line.
     """
     # read raw file content
-    with open(path_to_csv) as f:
+    with open(path_to_csv, encoding="utf8") as f:
         raw = f.read()
 
     # parse data

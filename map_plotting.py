@@ -74,8 +74,10 @@ def plot_trip(trip: Trip, projection = 'robin', line_width=2, colour='b') -> Non
         
     m.drawcoastlines()
     m.fillcontinents()
+    m.drawstates()
     filename = "map_" + "_".join(i.name for i in trip) + ".png"
     plt.savefig(filename)
+    plt.close()
 
 
 if __name__ == "__main__":
